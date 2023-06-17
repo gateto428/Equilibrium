@@ -1,0 +1,45 @@
+server:
+  port: "${SEVER_PORT}"
+  servlet:
+    encoding:
+      charset: "UTF-8"
+      force: true
+springdoc:
+  version: 1
+spring:
+  application:
+    name: "${APPLICATION_NAME}"
+  devtools:
+    add-properties: false
+  profiles:
+    active: "${SPRING_PROFILE_ACTIVE:local}"
+  webflux:
+    base-path: "${PATH_BASE}"
+  redis:
+    host: "localhost"
+    port: 6379
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "health,prometheus"
+  endpoint:
+    health:
+      probes:
+        enabled: true
+adapters:
+  secrets-manager:
+    Secret-rds: "${SECRET_RDS}"
+    cache-size: "${CACHE_SECRET_SIZE}"
+    cache-time: "${CACHE_SECRET_SECONDS}"
+    endpoint: "http://localhost:4566"
+  entries:
+    reactive-web:
+      person: "${PERSON}"
+      classP: "${CLASS}"
+      course: "${COURSE}"
+      pay: "${PAY}"
+      plan: "${PLAN}"
+      planCourses: "${PLAN_COURSE}"
+      userClass: "${USER_CLASS}"
+      path-base: "${PATH_BASE}"

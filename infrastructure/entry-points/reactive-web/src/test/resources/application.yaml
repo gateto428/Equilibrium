@@ -1,0 +1,11 @@
+adapters:
+  entries:
+    reactive-web:
+      person: /person
+      classP: /classP
+      course: /course
+      pay: /pay
+      plan: /plan
+      planCourses: /planCourses
+      userClass: /userClass
+      path-base: "api/v1/equilibrium/"

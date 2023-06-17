@@ -1,0 +1,6 @@
+dependencies {
+    implementation project(':model')
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'com.github.bancolombia:aws-secrets-manager-async:3.2.0'
+    implementation group: 'org.apache.logging.log4j', name: 'log4j-core', version: "${log4j2Version}"
+}

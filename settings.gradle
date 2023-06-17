@@ -1,0 +1,28 @@
+pluginManagement {
+    repositories {
+        //mavenLocal()
+        //maven { url '...' }
+        gradlePluginPortal()
+    }
+}
+
+rootProject.name = 'equilibrium'
+
+include ':app-service'
+include ':model'
+include ':usecase'
+project(':app-service').projectDir = file('./applications/app-service')
+project(':model').projectDir = file('./domain/model')
+project(':usecase').projectDir = file('./domain/usecase')
+include ":secrets-manager"
+project(':secrets-manager').projectDir = file('./infrastructure/helpers/secrets-manager')
+include ':r2dbc-postgresql'
+project(':r2dbc-postgresql').projectDir = file('./infrastructure/driven-adapters/r2dbc-postgresql')
+include ':reactive-web'
+project(':reactive-web').projectDir = file('./infrastructure/entry-points/reactive-web')
+include ':jwt-adapter'
+project(':jwt-adapter').projectDir = file('./infrastructure/driven-adapters/jwt-adapter')
+include ':email-adapter'
+project(':email-adapter').projectDir = file('./infrastructure/driven-adapters/email-adapter')
+include ':commons'
+project(':commons').projectDir = file('./infrastructure/helpers/commons')

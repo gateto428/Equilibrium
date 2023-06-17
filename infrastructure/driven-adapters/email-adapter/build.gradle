@@ -1,0 +1,7 @@
+dependencies {
+    implementation project(':model')
+    implementation project(':secrets-manager')
+    implementation 'org.springframework:spring-context'
+    implementation 'javax.mail:javax.mail-api:1.6.2'
+    implementation 'com.sun.mail:javax.mail:1.6.2'
+}

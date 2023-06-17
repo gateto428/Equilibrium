@@ -1,0 +1,11 @@
+{
+  "idPerson": "#(idPerson)",
+  "namePerson": "#(namePerson)",
+  "lastNamePerson": "#(lastNamePerson)",
+  "birthDatePerson": "1998-06-16",
+  "emailPerson": "#(emailPerson)",
+  "phonePerson": "3177833860",
+  "pass": "#(pass)",
+  "rolType": "#(rolType)",
+  "isActive": "#(isActive)"
+}

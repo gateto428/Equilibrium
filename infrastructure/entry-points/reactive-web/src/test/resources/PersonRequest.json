@@ -1,0 +1,11 @@
+{
+  "idPerson": "2",
+  "namePerson": "Nicolas",
+  "lastNamePerson": "Suarez",
+  "birthDatePerson": "1998-06-16",
+  "emailPerson": "nicolas.suarez@uptc.edu.co",
+  "phonePerson": "3177833860",
+  "pass": "2jmk3218",
+  "rolType": "ADMINISTRATOR",
+  "isActive": false
+}

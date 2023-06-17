@@ -1,0 +1,10 @@
+dependencies {
+    implementation project(':model')
+    implementation 'org.springframework:spring-context'
+    implementation group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
+    implementation 'io.jsonwebtoken:jjwt-jackson:0.11.2'
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation group: 'jakarta.json', name: 'jakarta.json-api', version: '2.0.1'
+    implementation group: 'org.jasypt', name: 'jasypt', version: '1.9.3'
+}

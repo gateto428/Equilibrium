@@ -1,0 +1,74 @@
+name: $(Build.SourceBranchName).$(date:yyyyMMdd)$(rev:.r)
+
+variables:
+  - name: 'Artifactory.Repository'
+    value: 'build-equilibrium/equilibrium'
+  - name: 'projectName'
+    value: 'equilibrium'
+  - name: 'artifactName'
+    value: 'equilibrium'
+  - name: 'NU'
+    value: 'equilibrium_pole_dance'
+
+resources:
+  - repo: self
+
+trigger:
+  branches:
+    include:
+      - main
+      - feature/*
+  paths:
+    include:
+      - 'equilibrium/*'
+
+jobs:
+  - job: BuildJob
+    displayName: 'Build'
+    pool:
+      name: Build
+      demands:
+        - java
+        - JAVA_HOME_11_X64
+    steps:
+      - script: |
+          cd $(Build.SourcesDirectory)/$(projectName)/
+          gradle wrapper
+        displayName: 'Generate gradle wrapper'
+      - task: CopyFiles@2
+        displayName: 'Copy Deployment Files'
+        inputs:
+          SourceFolder: $(projectName)/deployment
+          Contents: |
+            infrastructure/**
+          TargetFolder: $(Build.repository.LocalPath)/build/libs
+
+      - task: CopyFiles@2
+        displayName: 'Copy Jar'
+        inputs:
+          SourceFolder: $(projectName)/applications/app-service/build/libs/
+          Contents: |
+            *.jar
+            !*plain.jar
+          TargetFolder: $(Build.repository.LocalPath)/build/libs/infrastructure/app
+
+      - task: ArchiveFiles@2
+        displayName: 'Compress artifacts'
+        inputs:
+          rootFolderOrFile: $(Build.repository.LocalPath)/build/libs
+          includeRootFolder: false
+          archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildNumber).zip'
+
+      - task: PublishBuildArtifacts@1
+        displayName: 'Publish Artifact: App'
+        inputs:
+          PathtoPublish: '$(Build.repository.LocalPath)/build/libs/infrastructure/app'
+          ArtifactName: app-artifact
+        condition: succeeded()
+
+      - task: PublishBuildArtifacts@1
+        displayName: 'Publish Artifact: EKS'
+        inputs:
+          PathtoPublish: '$(Build.repository.LocalPath)/build/libs/infrastructure/eks'
+          ArtifactName: eks-artifact
+        condition: succeeded()
